@@ -1,56 +1,60 @@
-# Welcome to your Expo app 👋
+# Little Lemon Food Ordering App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Capstone project for the Meta React Native course. The app lets a customer enter their
+details once, browse the Little Lemon menu, search and filter dishes, and manage their
+profile.
 
-## Get started
+`wireframe.jpg` in the project root is the low-fidelity wireframe of the three screens.
 
-1. Install dependencies
+## Screens
 
-   ```bash
-   npm install
-   ```
+- **Onboarding** (shown on first launch): name and email fields; the **Next** button stays
+  disabled until both are filled in. Submitting saves the details and opens Home.
+- **Home**: header with logo and profile avatar, hero section with the restaurant
+  description and a search bar, an "Order for delivery" breakdown with selectable
+  categories (Starters, Mains, Desserts, Drinks), and a scrolling food menu list with
+  name, description, price and picture.
+- **Profile** (opened from the header avatar): prefilled with the onboarding data.
+  First name, last name, email, phone number and email notification toggles can be
+  edited, discarded or saved. **Log out** clears all profile data and returns to
+  onboarding. The back arrow returns to Home.
 
-2. Start the app
+Profile data is stored with AsyncStorage, so saved changes survive an app restart.
 
-   ```bash
-   npx expo start
-   ```
+## Run locally
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+Requirements: Node.js 18 or newer and npm. Expo Go on a phone or an Android/iOS
+simulator is optional; the app also runs in a browser.
 
 ```bash
-npm run reset-project
+npm install
+npx expo start
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+Then press `w` for web, `a` for Android or `i` for iOS in the Expo terminal, or run:
 
-### Other setup steps
+```bash
+npm run web
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+No API keys or backend are required. The menu data is bundled in
+`data/menuItems.js` and all images are local, so the app works offline.
 
-## Learn more
+## Project structure
 
-To learn more about developing your project with Expo, look at the following resources:
+```
+App.js                     providers, navigation container, status bar
+navigators/RootNavigator.js stack: Onboarding, Home, Profile
+context/ProfileContext.js   profile state and AsyncStorage persistence
+screens/                    OnboardingScreen, HomeScreen, ProfileScreen
+components/                 AppHeader, HeroSection, SearchBar, FormField
+data/menuItems.js           categories and menu items
+constants/theme.js          colors and heading font
+assets/images/              logo, hero, avatar and dish photos
+wireframe.jpg               wireframe submitted with the project
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Stack
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Expo SDK 58, React Native, React Navigation (native stack), AsyncStorage,
+@expo/vector-icons.
